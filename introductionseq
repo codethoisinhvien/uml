@@ -1,0 +1,12 @@
+@startuml
+hide footbox
+actor student  
+boundary introductionBoundary
+autoactivate on
+student->introductionBoundary:1//requrireIntroduction
+activate introductionBoundary
+introductionBoundary->introductionBoundary:2//displayInformatio
+autoactivate off
+introductionBoundary -->student 
+
+@enduml
