@@ -1,0 +1,30 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+actor student
+actor partner
+
+rectangle systerm{
+usecase (Login)
+usecase (logout)
+usecase (see list topic)
+usecase (see test results)
+   student -->(Login)
+   student -->(logout)
+   student -->(see profile)
+   student -->(see list topic) 
+   student --> (see list test)
+   (see list test).> (see list topic):<<include>>
+   
+    student -->(see history)
+ 
+    student --> (take an exam)
+   (take an exam).>(see test results): <<include>>
+   (see history)<.(see test results): <<extend>>
+   
+  
+   
+
+}
+
+@enduml
