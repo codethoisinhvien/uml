@@ -1,0 +1,49 @@
+@startuml
+hide footbox
+title upadate profile
+actor student
+boundary ":profileView"
+control ":userController"
+entity  ":user"
+activate student
+student ->":profileView" :1://requireUpdate
+activate ":profileView"
+ref over ":profileView",":userController",":user":get profile
+activate ":profileView"
+opt update Infomation
+    student->":profileView":// fillInromation
+    activate ":profileView"
+    ":profileView"->":profileView":// validate
+    deactivate ":profileView"
+    activate ":userController"
+   alt validate true
+    ":profileView"->":userController"://upadateProfile
+    activate ":user"
+    ":userController"->":user":upadateUser()
+    ":user"->":user":3//update
+   else validate false
+   end
+   
+
+     
+  else change password
+    student->":profileView":// changePassword
+    activate ":profileView"
+    ":profileView"->":profileView":// validate()
+  
+   alt validate true
+    ":profileView"->":userController"://changePassword()
+    deactivate ":profileView"
+    ":userController"->":user":changePassword()
+  
+    ":user"->":user":3//update
+   else validate false
+   end
+   
+  end
+
+
+
+
+
+@enduml

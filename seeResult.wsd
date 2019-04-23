@@ -1,0 +1,20 @@
+@startuml
+hide footbox
+title see Profile
+actor student  
+boundary ":resultView"
+control ":taskController"
+entity   ":task"
+activate student
+student-> ":resultView" :requireSeeresultAnEXam()"
+activate ":resultView"
+":resultView"->":taskController":getHistory(id_user)
+activate ":taskController"
+activate ":task"
+":taskController" -> ":task" :// getListTask()
+
+":resultView"->":resultView":// displaydData()
+activate ":resultView"
+deactivate ":resultView"
+
+@enduml

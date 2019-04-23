@@ -1,0 +1,32 @@
+@startuml
+hide footbox
+title upadate profile
+actor student
+boundary ":registerView"
+control ":userController"
+entity  ":user"
+activate student
+student->":registerView" :1//requireRegister
+activate ":registerView"
+":registerView" -> ":registerView" :2//displayForm()
+activate ":registerView"
+deactivate ":registerView"
+student->":registerView" :3//fillInformation
+
+":registerView"->":registerView":4//validate()
+alt valididate true
+    activate ":registerView"
+    deactivate ":registerView"
+    activate ":userController"
+    ":registerView"->":userController":5//register()
+    activate ":user"
+    ":userController"->":user":6//isExist()
+    alt not exsit 
+         ":userController"->":user":7//createUser()
+        ":userController"-->":registerView":// thanh công
+    else exsit 
+    ":userController"-->":registerView":// Thất bại
+    end
+else valididate false
+end
+@enduml

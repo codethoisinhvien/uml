@@ -12,11 +12,13 @@ usecase (see test results)
    student -->(Login)
    student -->(logout)
    student -->(see profile)
+   (see profile)<.(update profile ): <<extend>>
+   (see profile)<.(see achievements):<<extend>>
    student -->(see list topic) 
    student --> (see list test)
    (see list test).> (see list topic):<<include>>
    
-    student -->(see history)
+   student -->(see history)
  
     student --> (take an exam)
    (take an exam).>(see test results): <<include>>

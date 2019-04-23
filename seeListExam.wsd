@@ -1,0 +1,20 @@
+@startuml
+hide footbox
+title see Profile
+actor student  
+boundary ":listExamView"
+control ":examController"
+entity   ":exam"
+activate student
+
+student->":listExamView": //seeListExam()
+ref over student,":listExamView" :seeListSubject
+activate ":listExamView"
+":listExamView"->":examController":// getListExam()
+activate ":examController"
+":examController" -> ":exam":getListExam()
+activate ":exam"
+
+":listExamView"->":listExamView":displayExam()
+activate ":listExamView"
+@enduml

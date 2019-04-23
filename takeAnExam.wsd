@@ -1,0 +1,45 @@
+@startuml
+hide footbox
+title see Profile
+actor student  
+boundary ":taskView"
+control ":taskController"
+entity   ":user"
+entity   ":exam"
+entity   ":task"
+
+activate student
+
+student->":taskView": //requireTakeExam()
+activate ":taskView"
+":taskView"->":taskController":// createTask()
+activate ":taskController"
+activate ":user"
+":taskController" -> ":user"://getUser_id()
+activate ":exam"
+activate ":task"
+":taskController" -> ":task"://createTask()
+":taskController" -> ":exam"://getExam()
+":taskView"<--":taskController": data
+activate ":taskView"
+
+":taskView" -> ":taskView"://display()
+
+alt nbt
+student -> ":taskView" ://fillAnswers
+deactivate ":taskView"
+":taskView"->":taskController":// fillAnswer()
+
+":taskController" -> ":task"://updateTask()
+student -> ":taskView" ://nbt
+":taskView"->":taskController":// saveTask() 
+":taskController" -> ":task"://saveTask()  
+else timeout
+":taskView" -> ":taskView"://nbt()
+     activate ":taskView"
+     deactivate ":taskView"
+     ":taskView"->":taskController":// saveTask() 
+":taskController" -> ":task"://saveTask()
+end
+
+@enduml

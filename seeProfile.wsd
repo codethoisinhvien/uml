@@ -1,0 +1,17 @@
+@startuml
+hide footbox
+title see Profile
+actor student  
+boundary ":profileView"
+control ":userController"
+entity   ":user"
+activate student
+student->":profileView":1//requrireSeeProfile()
+activate ":profileView"
+":profileView"->":userController":2//getProfile()
+activate ":userController"
+":userController"->":user":3//getUser()
+activate ":user"
+":profileView"->":profileView":4// displayDataWithForm()
+activate ":profileView"
+@enduml
